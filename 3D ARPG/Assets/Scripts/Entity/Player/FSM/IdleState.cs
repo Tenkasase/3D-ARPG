@@ -11,6 +11,7 @@ public class IdleState : PlayerState
 
     public override void Enter()
     {
+        
         base.Enter();
         player.cc.SimpleMove(Vector3.zero);
         player.animator.SetFloat("verticalSpeed", 0f);

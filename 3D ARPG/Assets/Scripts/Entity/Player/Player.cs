@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     public IdleState  idleState { get; private set; }
     public MoveState  moveState { get; private set; }
     public DodgeState  dodgeState { get; private set; }
+    public AttackState attackState  { get; private set; }
 
     #endregion
 
@@ -53,6 +54,7 @@ public class Player : MonoBehaviour
         idleState = new IdleState(this, stateMachine);
         moveState = new MoveState(this, stateMachine);
         dodgeState = new DodgeState(this, stateMachine);
+        attackState = new AttackState(this, stateMachine);
     }
 
     private void Start()

@@ -7,13 +7,15 @@ public class PlayerInput : MonoBehaviour
     public Vector2 MoveInput { get; private set; }
     public bool IsRunning { get; private set; }
     public bool IsDodge { get; private set; }
+    public bool IsAttacking { get; private set; }
+    public int AttackCount  { get; private set; }
 
-    [Header("ShiftInfo")]
+    [Header("Shift Info")]
     [SerializeField] private float sprintHoldThreshold = 0.2f; // 长按超过 0.2 秒算作冲刺
     private float shiftPressedTime; // 记录 Shift 按下的时间点
     private bool hasTriggeredDodge; // 标志位：本次长按是否已经触发了冲刺
 
-    [Header("DodgeInfo")]
+    [Header("Dodge Info")]
     [SerializeField] private float dodgeCooldown = 1.0f; // 闪避冷却时间
 
     public bool CanDodge { get; private set; } // 暴露给外部看当前能不能闪避
@@ -31,6 +33,8 @@ public class PlayerInput : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         MoveInput = new Vector2(horizontal, vertical);
+        
+        HandleAttackInput();
         
         HandleShiftInput();
 
@@ -96,6 +100,16 @@ public class PlayerInput : MonoBehaviour
             {
                 CanDodge = true; // CD 结束，恢复闪避能力
             }
+        }
+    }
+
+    // 处理攻击逻辑
+    private void HandleAttackInput()
+    {
+        IsAttacking = false;
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            IsAttacking = true;
         }
     }
 }
