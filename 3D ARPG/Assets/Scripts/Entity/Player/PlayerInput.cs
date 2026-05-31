@@ -8,7 +8,6 @@ public class PlayerInput : MonoBehaviour
     public bool IsRunning { get; private set; }
     public bool IsDodge { get; private set; }
     public bool IsAttacking { get; private set; }
-    public int AttackCount  { get; private set; }
 
     [Header("Shift Info")]
     [SerializeField] private float sprintHoldThreshold = 0.2f; // 长按超过 0.2 秒算作冲刺
@@ -20,6 +19,8 @@ public class PlayerInput : MonoBehaviour
 
     public bool CanDodge { get; private set; } // 暴露给外部看当前能不能闪避
     private float cooldownTimer;
+    
+    
 
     void Start()
     {

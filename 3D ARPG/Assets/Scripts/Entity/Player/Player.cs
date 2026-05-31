@@ -25,6 +25,9 @@ public class Player : MonoBehaviour
     public float dodgeSpeed = 10f;    // 闪避时的瞬时速度
     public float dodgeDuration = 1.2f; // 闪避持续时间（需要和动画长度大致匹配）
 
+    [Header(("Attack Info"))] 
+    public float comboDuration = 1f; // 连击持续时间，超过这个时间没有继续攻击就重置连击计数
+
     #endregion
 
     #region States
@@ -68,10 +71,25 @@ public class Player : MonoBehaviour
         
         stateMachine.currentState.Update();
     }
+
+    #region 动画事件
+
     
-    /// <summary>
-    /// 动画触发器接口，供状态调用以触发动画
-    /// </summary>
-    /// <param name="animationTrigger"></param>
-    public void AnimationTrigger(string animationTrigger) => animator.SetTrigger(animationTrigger);
+    public void AnimEvent_EnableCombo()
+    {
+        if (stateMachine.currentState is AttackState attack)
+        {
+            attack.OnEnableComboWindow();
+        }
+    }
+
+    public void AnimEvent_DisableCombo()
+    {
+        if (stateMachine.currentState is AttackState attack)
+        {
+            attack.OnDisableComboWindow();
+        }
+    }
+
+    #endregion
 }

@@ -34,6 +34,13 @@ public class MoveState : PlayerState
             return;
         }
         
+        // 攻击
+        if (player.playerInput.IsAttacking)
+        {
+            stateMachine.ChangeState(player.attackState);
+            return;
+        }
+        
         // 没有移动输入
         if(moveInput.magnitude < 0.1f)
         {
